@@ -314,7 +314,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnGetImg" pref="114" max="32767" attributes="0"/>
-                                  <Component id="jButton3" max="32767" attributes="0"/>
+                                  <Component id="btnRemake" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -335,7 +335,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnRemake" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSignOut" min="-2" max="-2" attributes="0"/>
@@ -365,14 +365,20 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="X&#xf3;a Svi&#xea;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="btnRemake">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="2" name="C:\Users\PC\Documents\NetBeansProjects\Jav3-Assign\24x24\refresh.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a Svi&#xea;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemakeActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnGetImg">
               <Properties>

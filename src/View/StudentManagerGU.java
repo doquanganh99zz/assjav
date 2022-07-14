@@ -134,7 +134,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
         studentAvatar = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnRemake = new javax.swing.JButton();
         btnGetImg = new javax.swing.JButton();
         btnSignOut = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -262,9 +262,19 @@ public class StudentManagerGU extends javax.swing.JFrame {
 
         btnRemove.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Documents\\NetBeansProjects\\Jav3-Assign\\24x24\\delete.png")); // NOI18N
         btnRemove.setText("Xóa Sviên");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Documents\\NetBeansProjects\\Jav3-Assign\\24x24\\refresh.png")); // NOI18N
-        jButton3.setText("Sửa Sviên");
+        btnRemake.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Documents\\NetBeansProjects\\Jav3-Assign\\24x24\\refresh.png")); // NOI18N
+        btnRemake.setText("Sửa Sviên");
+        btnRemake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemakeActionPerformed(evt);
+            }
+        });
 
         btnGetImg.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Documents\\NetBeansProjects\\Jav3-Assign\\24x24\\folder.png")); // NOI18N
         btnGetImg.setText("Lấy ảnh");
@@ -300,7 +310,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnGetImg, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnRemake, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -315,7 +325,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRemove)
-                    .addComponent(jButton3))
+                    .addComponent(btnRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSignOut)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -443,6 +453,10 @@ public class StudentManagerGU extends javax.swing.JFrame {
         if (!checkData()) {
             return;
         }
+        if(smsi.isExistStudent(txtStudentId.getText().trim().toLowerCase())){
+              JOptionPane.showMessageDialog(this, "Mã sinh viên đã tồn tại!");
+              return;
+        }
         smsi.addNewStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), f.getPath());
         list = smsi.getList();
         clearData();
@@ -473,49 +487,77 @@ public class StudentManagerGU extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGetImgActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentManagerGU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentManagerGU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentManagerGU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentManagerGU.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StudentManagerGU().setVisible(true);
-            }
-        });
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        if (smsi.isExistStudent(txtStudentId.getText().trim())) {
+            smsi.removeStudent(txtStudentId.getText().trim());
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            list = smsi.getList();
+            clearData();
+            data2Tbl();
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "Sinh viên không tồn tại!");
+    }//GEN-LAST:event_btnRemoveActionPerformed
     }
+
+    private boolean checkDataRemake() {
+        String hoTen = txtStudentName.getText().trim();
+        String email = txtStudentEmail.getText().trim();
+        String diaChi = areaStudentAddress.getText().trim();
+        String sdt = txtStudentSdt.getText().trim();
+
+        String regexHoTen = "^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềếểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ế]+$";
+        if (!hoTen.matches(regexHoTen)) {
+            JOptionPane.showMessageDialog(this, "Họ tên không đúng định dạng!");
+            return false;
+        }
+        for (int i = 0; i < hoTen.length() - 1; i++) {
+            if (hoTen.charAt(i) == ' ' && hoTen.charAt(i + 1) == ' ') {
+                JOptionPane.showMessageDialog(this, "Họ tên không đúng định dạng!");
+                return false;
+            }
+        }
+        String regexEmail = "^\\w{6,}@\\w{3,5}\\.\\w{2,3}\\.\\w{2}$";
+        if (!email.matches(regexEmail)) {
+            JOptionPane.showMessageDialog(this, "Email không đúng định dạng!");
+            return false;
+        }
+        String regexSdt = "^0[1-9][0-9]{9}$";
+        if (!sdt.matches(regexSdt)) {
+            JOptionPane.showMessageDialog(this, "SDT không đúng định dạng!");
+            return false;
+        }
+        if (f == null) {
+            JOptionPane.showMessageDialog(this, "Hãy chọn ảnh đại diện cho sinh viên!");
+            return false;
+        }
+        return true;
+    }
+    private void btnRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemakeActionPerformed
+        if (!smsi.isExistStudent(txtStudentId.getText().trim())) {
+            JOptionPane.showMessageDialog(this, "Sinh viên không tồn tại!");
+            return;
+        }
+        if (!checkDataRemake()) {
+            return;
+        }
+        smsi.updateStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), f.getPath());
+        list = smsi.getList();
+        clearData();
+        data2Tbl();
+        JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+    }//GEN-LAST:event_btnRemakeActionPerformed
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaStudentAddress;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnGetImg;
+    private javax.swing.JButton btnRemake;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSignOut;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

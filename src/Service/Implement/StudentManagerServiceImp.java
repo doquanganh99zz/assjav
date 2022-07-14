@@ -31,12 +31,14 @@ public class StudentManagerServiceImp implements Service.StudentManagerService {
     }
 
     @Override
-    public void updateStudent(int index, Student s) {
+    public void updateStudent(String maSv, String hoTen, String email, String sdt, String gioiTinh, String diaChi, String avatarPath) {
+        rmi.remakeStudent(maSv, hoTen, email, sdt, gioiTinh, diaChi, avatarPath);
         _list = rmi.getDataStudent();
     }
 
     @Override
-    public void removeStudent(int index) {
+    public void removeStudent(String maSv) {
+        rmi.removeStudent(maSv);
         _list = rmi.getDataStudent();
     }
 
@@ -44,6 +46,16 @@ public class StudentManagerServiceImp implements Service.StudentManagerService {
     public List<Student> getList() {
         _list = rmi.getDataStudent();
         return _list;
+    }
+
+    @Override
+    public boolean isExistStudent(String maSv) {
+        for (String string : rmi.getEveryStudentId()) {
+            if(maSv.trim().toLowerCase().equals(string.trim().toLowerCase())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -73,10 +73,7 @@ public class GradeManagerGU extends javax.swing.JFrame {
         tblMain.setModel(dtm);
     }
     
-    public static void main(String[] args) {
-        GradeManagerGU g = new GradeManagerGU();
-        g.setVisible(true);
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.

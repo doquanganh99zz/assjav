@@ -180,7 +180,33 @@ public class ResposiveMethodImp implements ResposiveMethod {
     @Override
     public boolean addNewStudent(String maSv, String hoTen, String email, String sdt, String gioiTinh, String diaChi, String avatarPath) {
         try {
-            String query = "EXEC dbo.ADDNEWSTUDENT '"+maSv + "','" + hoTen + "','" + email + "','" + sdt + "','" + gioiTinh + "','" + diaChi + "','" + avatarPath + "'";
+            String query = "EXEC dbo.ADDNEWSTUDENT '" + maSv + "','" + hoTen + "','" + email + "','" + sdt + "','" + gioiTinh + "','" + diaChi + "','" + avatarPath + "'";
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean removeStudent(String maSv) {
+        try {
+            String query = "EXEC dbo.DELETESTUDENT '" + maSv + "'";
+            Statement st = con.createStatement();
+            st.executeUpdate(query);
+            return true;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
+
+    @Override
+    public boolean remakeStudent(String maSv, String hoTen, String email, String sdt, String gioiTinh, String diaChi, String avatarPath) {
+        try {
+            String query = "EXEC dbo.REMAKESTUDENT '" + maSv + "','" + hoTen + "','" + email + "','" + sdt + "','" + gioiTinh + "','" + diaChi + "','" + avatarPath + "'";
             Statement st = con.createStatement();
             st.executeUpdate(query);
             return true;

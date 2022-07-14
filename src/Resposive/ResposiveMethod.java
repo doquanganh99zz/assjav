@@ -39,4 +39,8 @@ public interface ResposiveMethod {
     public List<Student> getDataStudent();
 
     public boolean addNewStudent(String maSv, String hoTen, String email, String sdt, String gioiTinh, String diaChi, String avatarPath);
+
+    public boolean removeStudent(String maSv);
+
+    public boolean remakeStudent(String maSv, String hoTen, String email, String sdt, String gioiTinh, String diaChi, String avatarPath);
 }
