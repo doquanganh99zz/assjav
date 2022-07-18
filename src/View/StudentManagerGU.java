@@ -137,6 +137,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
         btnRemake = new javax.swing.JButton();
         btnGetImg = new javax.swing.JButton();
         btnSignOut = new javax.swing.JButton();
+        btnClearForm = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
@@ -217,7 +218,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtStudentName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,6 +293,14 @@ public class StudentManagerGU extends javax.swing.JFrame {
             }
         });
 
+        btnClearForm.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\coquette-icons-set20170904-28546-1pu8cev\\png\\16x16\\back.png")); // NOI18N
+        btnClearForm.setText("Clear Form");
+        btnClearForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearFormActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -310,7 +319,8 @@ public class StudentManagerGU extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnGetImg, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(btnRemake, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnRemake, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClearForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -327,8 +337,10 @@ public class StudentManagerGU extends javax.swing.JFrame {
                     .addComponent(btnRemove)
                     .addComponent(btnRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSignOut)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearForm, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignOut))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -337,13 +349,15 @@ public class StudentManagerGU extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         tblMain.setModel(new javax.swing.table.DefaultTableModel(
@@ -368,7 +382,6 @@ public class StudentManagerGU extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -376,6 +389,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
                 .addGap(179, 179, 179)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,9 +467,9 @@ public class StudentManagerGU extends javax.swing.JFrame {
         if (!checkData()) {
             return;
         }
-        if(smsi.isExistStudent(txtStudentId.getText().trim().toLowerCase())){
-              JOptionPane.showMessageDialog(this, "Mã sinh viên đã tồn tại!");
-              return;
+        if (smsi.isExistStudent(txtStudentId.getText().trim().toLowerCase())) {
+            JOptionPane.showMessageDialog(this, "Mã sinh viên đã tồn tại!");
+            return;
         }
         smsi.addNewStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), f.getPath());
         list = smsi.getList();
@@ -527,10 +541,10 @@ public class StudentManagerGU extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "SDT không đúng định dạng!");
             return false;
         }
-        if (f == null) {
-            JOptionPane.showMessageDialog(this, "Hãy chọn ảnh đại diện cho sinh viên!");
-            return false;
-        }
+//        if (f == null) {
+//            JOptionPane.showMessageDialog(this, "Hãy chọn ảnh đại diện cho sinh viên!");
+//            return false;
+//        }
         return true;
     }
     private void btnRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemakeActionPerformed
@@ -541,18 +555,32 @@ public class StudentManagerGU extends javax.swing.JFrame {
         if (!checkDataRemake()) {
             return;
         }
-        smsi.updateStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), f.getPath());
+        if (f == null) {
+            smsi.updateStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), "NULL");
+        } else {
+            smsi.updateStudent(txtStudentId.getText().trim(), txtStudentName.getText().trim(), txtStudentEmail.getText().trim(), txtStudentSdt.getText().trim(), rdoNam.isSelected() == true ? "1" : "0", areaStudentAddress.getText().trim(), f.getPath());
+        }
         list = smsi.getList();
         clearData();
         data2Tbl();
         JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
     }//GEN-LAST:event_btnRemakeActionPerformed
 
-   
+    private void btnClearFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearFormActionPerformed
+        txtStudentEmail.setText("");
+        txtStudentId.setText("");
+        txtStudentName.setText("");
+        txtStudentSdt.setText("");
+        rdoNam.setSelected(true);
+        areaStudentAddress.setText("");
+        studentAvatar.setIcon(null);
+    }//GEN-LAST:event_btnClearFormActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaStudentAddress;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClearForm;
     private javax.swing.JButton btnGetImg;
     private javax.swing.JButton btnRemake;
     private javax.swing.JButton btnRemove;
