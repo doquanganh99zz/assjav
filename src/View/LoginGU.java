@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class LoginGU extends javax.swing.JFrame {
 
     private ResposiveMethodImp rmi;
+    private boolean b = true;
 
     /**
      * Creates new form LoginGU
@@ -132,8 +133,11 @@ public class LoginGU extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUserNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMouseClicked
-        txtUserName.setForeground(Color.BLACK);
-        txtUserName.setText("");
+        if (b) {
+            txtUserName.setForeground(Color.BLACK);
+            txtUserName.setText("");
+            b = false;
+        }
     }//GEN-LAST:event_txtUserNameMouseClicked
 
     private void txtUserPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserPassMouseClicked
@@ -144,7 +148,7 @@ public class LoginGU extends javax.swing.JFrame {
         rmi.connectSQL();
         String user = txtUserName.getText();
         String pass = String.valueOf(txtUserPass.getPassword());
-        if(user.trim().length()==0||pass.trim().length()==0){
+        if (user.trim().length() == 0 || pass.trim().length() == 0) {
             JOptionPane.showMessageDialog(this, "Không được để trống !");
             return;
         }
@@ -154,11 +158,11 @@ public class LoginGU extends javax.swing.JFrame {
             return;
         }
         JOptionPane.showMessageDialog(this, "Login Susseced");
-        if (a.getPermission()==1){
+        if (a.getPermission() == 1) {
             StudentManagerGU smg = new StudentManagerGU();
             this.dispose();
             smg.setVisible(true);
-        }else{
+        } else {
             GradeManagerGU gmg = new GradeManagerGU();
             this.dispose();
             gmg.setVisible(true);

@@ -360,6 +360,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
+        tblMain.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         tblMain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -419,6 +420,7 @@ public class StudentManagerGU extends javax.swing.JFrame {
         if (index == -1) {
             return;
         }
+        f = null;
         data2Controls(index);
     }//GEN-LAST:event_tblMainMouseClicked
     private boolean checkData() {
@@ -573,7 +575,10 @@ public class StudentManagerGU extends javax.swing.JFrame {
         txtStudentSdt.setText("");
         rdoNam.setSelected(true);
         areaStudentAddress.setText("");
-        studentAvatar.setIcon(null);
+        ImageIcon img = new ImageIcon("D:\\img\\0.jpg");
+        Image i = img.getImage();
+        studentAvatar.setIcon(new ImageIcon(Img.resizer(i, 121, 154)));
+        f = null;
     }//GEN-LAST:event_btnClearFormActionPerformed
 
 

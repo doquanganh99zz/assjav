@@ -76,10 +76,8 @@
                   <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="btnLogin" pref="248" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtUserName" max="32767" attributes="0"/>
-                          <Component id="txtUserPass" pref="248" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtUserName" max="32767" attributes="0"/>
+                      <Component id="txtUserPass" pref="248" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
